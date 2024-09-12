@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style/intro.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sintony:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <title>PopItReactionGame - Train your reflex</title>
+</head>
+<body>
+    <div id="intro-section" class="section active">
+        <div class="title" data-aos="fade-up" data-aos-duration="3000">
+            <h1>PopIt Reaction Game</h1>
+            <p>Train your reflexes by popping balloons in the given time frame</p>
+        </div>
+        <div class="start" data-aos="zoom-in" data-aos-duration="3000">
+            <button class="start-btn">
+                <span id="play-btn" class="material-symbols-outlined">
+                    play_circle
+                </span>
+                <a class="start-game-link" onclick="showSection('game-section')">start game</a>
+            </button>
+        </div>
+        <div class="settings" data-aos="zoom-in" data-aos-duration="3000">
+            <div class="cogwheel help-box">
+                <span class="material-symbols-outlined">
+                    settings
+                </span>
+            </div>
+            <div class="mute help-box">
+                <span class="material-symbols-outlined">
+                    volume_up
+                </span>
+            </div>
+            <div class="information help-box">
+                <span class="material-symbols-outlined">
+                    help
+                </span>
+            </div>
+        </div>
+        
+        <footer>
+            <small>Copyright © 2024 ARTHUR Félix-Vincent. Tous droits réservés.</small>
+        </footer>
+        <audio id="myaudio" src="./music/background/background.mp3" autoplay="true" loop="true">
+
+    </div>
+    <div id="game-section" class="section">
+        <div class="title" data-aos="fade-up" data-aos-duration="3000">
+            <h1>PopIt Reaction Game</h1>
+            <p>Train your reflexes by popping balloons in the given time frame</p>
+        </div>
+        <div class="statistics-panel">
+            <div class="maxScoreReached-group statistics-group">
+                <p class="maxScoreReachedLabel statistics-title">Max Score</p>
+                <p id="maxScoreReached"></p>
+            </div>
+            <div class="currentScore-group statistics-group">
+                <p class="currentScoreLabel statistics-title">Score</p>
+                <p id="currentScore"></p>
+            </div>
+            <div class="time-group statistics-group">
+                <p class="timeLabel statistics-title">Time</p>
+                <p id="time"></p>
+            </div>
+        </div>
+        <div id="popIt-panel"></div>
+        <div id="message"></div>
+    </div>
+    <div id="lost-section" class="section">
+        <div class="title" data-aos="fade-up" data-aos-duration="3000">
+            <h1>You lost !</h1>
+            <p>Don't panic. Try again later !</p>
+        </div>
+        <div class="start" data-aos="zoom-in" data-aos-duration="3000">
+            <button class="start-btn">
+                <span id="play-btn" class="material-symbols-outlined">
+                    play_circle
+                </span>
+                <a class="start-game-link" href="./game.html">retry</a>
+            </button>
+        </div>
+        
+        <footer>
+            <small>Copyright © 2024 ARTHUR Félix-Vincent. Tous droits réservés.</small>
+        </footer>
+        <audio id="myaudio" src="./music/background/background.mp3" autoplay="true" loop="true">
+
+    </div>
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.classList.remove('active'));
+
+            // Show the selected section
+            const sectionToShow = document.getElementById(sectionId);
+            sectionToShow.classList.add('active');
+        }
+
+        function endGame() {
+            // Here, you could add any logic for ending the game
+            showSection('game-over-section');
+        }
+    </script>
+</body>
+</html>

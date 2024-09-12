@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style/game.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sintony:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <title>PopItReactionGame - Train your reflex</title>
+</head>
+<body>
+    <div class="container">
+        <div class="title" data-aos="fade-up" data-aos-duration="3000">
+            <h1>PopIt Reaction Game</h1>
+            <p>Train your reflexes by popping balloons in the given time frame</p>
+        </div>
+        <div class="statistics-panel">
+            <div class="maxScoreReached-group statistics-group">
+                <p class="maxScoreReachedLabel statistics-title">Max Score</p>
+                <p id="maxScoreReached"></p>
+            </div>
+            <div class="currentScore-group statistics-group">
+                <p class="currentScoreLabel statistics-title">Score</p>
+                <p id="currentScore"></p>
+            </div>
+            <div class="time-group statistics-group">
+                <p class="timeLabel statistics-title">Time</p>
+                <p id="time"></p>
+            </div>
+        </div>
+        <div id="popIt-panel"></div>
+        <div id="message"></div>
+    </div>
+    <footer>
+        <small>Copyright © 2024 ARTHUR Félix-Vincent. Tous droits réservés.</small>
+    </footer>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+        // var audio = document.getElementById("myaudio");
+        // audio.volume = 0.1;
+    </script>
+    <script src="./js/PopIt.js"></script>
+</body>
+</html>

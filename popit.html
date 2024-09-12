@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sintony:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <title>PopItReactionGame - Train your reflex</title>
+</head>
+<body>
+    <!-- Page de garde -->
+    <div id="start-page" class="page active">
+        <div class="container">
+            <div class="title" data-aos="fade-up" data-aos-duration="3000">
+                <h1>PopIt Reaction Game</h1>
+                <p>Train your reflexes by popping balloons in the given time frame</p>
+            </div>
+            <div class="start" data-aos="zoom-in" data-aos-duration="3000">
+                <button class="start-btn">
+                    <span id="play-btn" class="material-symbols-outlined">play_circle</span>
+                    start game
+                </button>
+            </div>
+            <div class="settings" data-aos="zoom-in" data-aos-duration="3000">
+                <div class="cogwheel help-box">
+                    <span class="material-symbols-outlined">settings</span>
+                </div>
+                <div class="mute help-box">
+                    <span class="material-symbols-outlined">volume_up</span>
+                </div>
+                <div class="information help-box">
+                    <span class="material-symbols-outlined">help</span>
+                </div>
+            </div>
+            <footer>
+                <small>Copyright © 2024 ARTHUR Félix-Vincent. Tous droits réservés.</small>
+            </footer>
+            <audio src="./music/background/background.mp3" autoplay="true" loop="true"></audio>
+        </div>
+    </div>
+
+    <!-- Page de jeu -->
+    <div id="game-page" class="page">
+        <div class="container">
+            <div class="title">
+                <h1>PopIt Reaction Game</h1>
+                <p>Train your reflexes by popping balloons in the given time frame</p>
+            </div>
+            <div class="statistics-panel">
+                <div class="maxScoreReached-group statistics-group">
+                    <p class="maxScoreReachedLabel statistics-title">Max</p>
+                    <p id="maxScoreReached"></p>
+                </div>
+                <div class="currentScore-group statistics-group">
+                    <p class="currentScoreLabel statistics-title">Score</p>
+                    <p id="currentScore"></p>
+                </div>
+                <div class="time-group statistics-group">
+                    <p class="timeLabel statistics-title">Time</p>
+                    <p id="time"></p>
+                </div>
+            </div>
+            <div id="popIt-panel"></div>
+            <div id="message"></div>
+            <button id="back-to-start-btn">Retour</button>
+        </div>
+    </div>
+
+    <!-- Page de perte -->
+    <div id="game-over-page" class="page">
+        <div class="container">
+            <h1>Game Over!</h1>
+            <p>Votre Score: <span id="finalScore"></span></p>
+            <button id="restart-btn">Rejouer</button>
+            <button id="back-to-start-btn-over">Retour</button>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="./js/PopIt.js"></script>
+    <script>
+        AOS.init();
+    </script>
+</body>
+</html>
