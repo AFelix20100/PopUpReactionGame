@@ -1,7 +1,7 @@
-var maxScoreReached = document.getElementById("maxScoreReached");
-var currentScore = document.getElementById("currentScore");
-var time = document.getElementById("time");
-var popItPanel = document.getElementById("popIt-panel");
+var maxScoreReached = document.getElementById("game-maxScoreReached");
+var currentScore = document.getElementById("game-currentScore");
+var time = document.getElementById("game-time");
+var popItPanel = document.getElementById("game-popIt-panel");
 
 var score = 0;
 var countDown = 5; // Temps initial
@@ -43,14 +43,14 @@ function createCircles() {
     for (let index = 0; index < numberOrder.length; index++) {
         const number = numberOrder[index];
         var circle = document.createElement("div");
-        circle.classList.add("circle");
-        circle.classList.add(`pop-${number}`);
+        circle.classList.add("game-circle");
+        circle.classList.add(`game-pop-${number}`);
         circle.setAttribute("data-key", number);
         circle.innerHTML = number;
         
         // Vérifier si le cercle doit être une cible
         if (targetNumbers.includes(number)) {
-            circle.classList.add("target"); // Ajouter une classe cible
+            circle.classList.add("game-target"); // Ajouter une classe cible
         }
 
         popItPanel.appendChild(circle);
@@ -99,13 +99,13 @@ function handleKeyPress(e) {
         clickSound.play();
 
         // Sélectionne le cercle avec la classe pop et l'attribut data-key correspondant
-        const activeCircle = document.querySelector(`.pop-${key}`);
+        const activeCircle = document.querySelector(`.game-pop-${key}`);
         // Vérifiez si un cercle a été trouvé
         if (activeCircle) {
             // Vérifiez si le cercle est une cible (target)
-            if (activeCircle.classList.contains('target')) {
+            if (activeCircle.classList.contains('game-target')) {
                 // Retirer la classe 'target' après 200ms
-                activeCircle.classList.remove('target');
+                activeCircle.classList.remove('game-target');
 
                 // Incrémenter le score
                 score += 100;
@@ -117,7 +117,7 @@ function handleKeyPress(e) {
                 updateUI();
 
                 // Vérifiez s'il reste des cercles cibles
-                let lastCircles = document.getElementsByClassName('target');
+                let lastCircles = document.getElementsByClassName('game-target');
                 if (lastCircles.length === 0) { 
                     gameSeriesCount++;
                     checkMaxScore();
@@ -173,18 +173,37 @@ function updateUI() {
     time.textContent = `${countDown}s`;
 }
 
-function startGame() {
-    createCircles();
-    updateUI();
-    interval = setInterval(() => {
-        countDown--;
-        time.textContent = countDown + "s";
-        if (countDown <= 0) {
-            clearInterval(interval);
-            alert('Temps écoulé ! Votre score : ' + score);
-            window.location.href = "lost.html";
+// Fonction pour afficher un compte à rebours avant le lancement du jeu
+function startCountdown(callback) {
+    let countdown = 3;
+    time.textContent = `Le jeu commence dans ${countdown}...`;
+
+    let countdownInterval = setInterval(() => {
+        countdown--;
+        time.textContent = `Le jeu commence dans ${countdown}...`;
+
+        if (countdown <= 0) {
+            clearInterval(countdownInterval);
+            callback(); // Lancer le jeu après le compte à rebours
         }
     }, 1000);
+}
+
+// Démarre le jeu avec le compte à rebours initial
+function startGame() {
+    startCountdown(() => {
+        createCircles();
+        updateUI();
+        interval = setInterval(() => {
+            countDown--;
+            time.textContent = countDown + "s";
+            if (countDown <= 0) {
+                clearInterval(interval);
+                alert('Temps écoulé ! Votre score : ' + score);
+                window.location.href = "lost.html";
+            }
+        }, 1000);
+    });
 }
 
 document.addEventListener('keydown', handleKeyPress);
