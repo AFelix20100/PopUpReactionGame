@@ -66,7 +66,7 @@
     transition: background-color 0.7s, padding 0.7s, font-size 0.7s;
     animation: moveUpDown 3s ease-in-out infinite;
 }
-.intro-play-btn {
+#intro-play-btn {
     font-size: 50px !important; /* Taille normale de l'icône */
     vertical-align: middle;
     margin-right: 8px !important; /* Espace entre l'icône et le texte */

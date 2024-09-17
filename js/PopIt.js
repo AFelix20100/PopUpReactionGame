@@ -174,36 +174,34 @@ function updateUI() {
 }
 
 // Fonction pour afficher un compte à rebours avant le lancement du jeu
-function startCountdown(callback) {
-    let countdown = 3;
-    time.textContent = `Le jeu commence dans ${countdown}...`;
+// function startCountdown(callback) {
+//     let countdown = 3;
+//     time.textContent = `Le jeu commence dans ${countdown}...`;
 
-    let countdownInterval = setInterval(() => {
-        countdown--;
-        time.textContent = `Le jeu commence dans ${countdown}...`;
+//     let countdownInterval = setInterval(() => {
+//         countdown--;
+//         time.textContent = `Le jeu commence dans ${countdown}...`;
 
-        if (countdown <= 0) {
-            clearInterval(countdownInterval);
-            callback(); // Lancer le jeu après le compte à rebours
-        }
-    }, 1000);
-}
+//         if (countdown <= 0) {
+//             clearInterval(countdownInterval);
+//             callback(); // Lancer le jeu après le compte à rebours
+//         }
+//     }, 1000);
+// }
 
 // Démarre le jeu avec le compte à rebours initial
 function startGame() {
-    startCountdown(() => {
-        createCircles();
-        updateUI();
-        interval = setInterval(() => {
-            countDown--;
-            time.textContent = countDown + "s";
-            if (countDown <= 0) {
-                clearInterval(interval);
-                alert('Temps écoulé ! Votre score : ' + score);
-                window.location.href = "lost.html";
-            }
-        }, 1000);
-    });
+    createCircles();
+    updateUI();
+    interval = setInterval(() => {
+        countDown--;
+        time.textContent = countDown + "s";
+        if (countDown <= 0) {
+            clearInterval(interval);
+            alert('Temps écoulé ! Votre score : ' + score);
+            window.location.href = "lost.html";
+        }
+    }, 1000);
 }
 
 document.addEventListener('keydown', handleKeyPress);
