@@ -174,25 +174,8 @@ function updateUI() {
     time.textContent = `${countDown}s`;
 }
 
-// // Fonction pour afficher un compte à rebours avant le lancement du jeu
-// function startCountdown() {
-//     let countdown = 3;
-//     time.textContent = `Le jeu commence dans ${countdown}...`;
-
-//     let countdownInterval = setInterval(() => {
-//         countdown--;
-//         time.textContent = `Le jeu commence dans ${countdown}...`;
-
-//         if (countdown <= 0) {
-//             clearInterval(countdownInterval);
-//             callback(); // Lancer le jeu après le compte à rebours
-//         }
-//     }, 1000);
-// }
-
 // Démarre le jeu avec le compte à rebours initial
 function startGame() {
-    // startCountdown();
     createCircles();
     updateUI();
     interval = setInterval(() => {
