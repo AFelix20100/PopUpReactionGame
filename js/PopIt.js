@@ -192,7 +192,7 @@ function updateUI() {
 
 // Démarre le jeu avec le compte à rebours initial
 function startGame() {
-    startCountdown();
+    // startCountdown();
     createCircles();
     updateUI();
     interval = setInterval(() => {
