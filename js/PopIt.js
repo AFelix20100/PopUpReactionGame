@@ -127,7 +127,8 @@ function handleKeyPress(e) {
                 // Le joueur a cliqué sur le mauvais cercle, il a perdu
                 alert('Game Over! You clicked the wrong circle.');
                 checkMaxScore();
-                window.location.href = "lost.html";
+                // window.location.href = "lost.html";
+                endgame();
                 resetGame(true); // Pass the flag to indicate a loss
             }
         }
@@ -173,8 +174,8 @@ function updateUI() {
     time.textContent = `${countDown}s`;
 }
 
-// Fonction pour afficher un compte à rebours avant le lancement du jeu
-// function startCountdown(callback) {
+// // Fonction pour afficher un compte à rebours avant le lancement du jeu
+// function startCountdown() {
 //     let countdown = 3;
 //     time.textContent = `Le jeu commence dans ${countdown}...`;
 
@@ -191,6 +192,7 @@ function updateUI() {
 
 // Démarre le jeu avec le compte à rebours initial
 function startGame() {
+    startCountdown();
     createCircles();
     updateUI();
     interval = setInterval(() => {

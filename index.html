@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style/intro.css">
+    <link rel="stylesheet" href="./style/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sintony:wght@400;700&display=swap" rel="stylesheet">
@@ -12,20 +12,20 @@
     <title>PopItReactionGame - Train your reflex</title>
 </head>
 <body>
-    <div class="container">
-        <div class="title" data-aos="fade-up" data-aos-duration="3000">
+    <div class="intro-section section active">
+        <div class="intro-title" data-aos="fade-up" data-aos-duration="3000">
             <h1>PopIt Reaction Game</h1>
             <p>Train your reflexes by popping balloons in the given time frame</p>
         </div>
-        <div class="start" data-aos="zoom-in" data-aos-duration="3000">
-            <button class="start-btn">
-                <span id="play-btn" class="material-symbols-outlined">
+        <div class="intro-start" data-aos="zoom-in" data-aos-duration="3000">
+            <button class="intro-start-btn">
+                <span id="intro-play-btn" class="material-symbols-outlined">
                     play_circle
                 </span>
-                <a class="start-game-link" href="./game.html">start game</a>
+                <a class="intro-start-game-link" onclick="showSection('game-section')">start game</a>
             </button>
         </div>
-        <div class="settings" data-aos="zoom-in" data-aos-duration="3000">
+        <div class="intro-settings" data-aos="zoom-in" data-aos-duration="3000">
             <div class="cogwheel help-box">
                 <span class="material-symbols-outlined">
                     settings
@@ -46,14 +46,109 @@
         <footer>
             <small>Copyright © 2024 ARTHUR Félix-Vincent. Tous droits réservés.</small>
         </footer>
+        
+    </div>
+    <div class="game-section section">
+        <div class="game-title" data-aos="fade-up" data-aos-duration="3000">
+            <h1>PopIt Reaction Game</h1>
+            <p>Train your reflexes by popping balloons in the given time frame</p>
+        </div>
+        <div class="game-statistics-panel">
+            <div class="game-maxScoreReached-group game-statistics-group">
+                <p class="game-maxScoreReachedLabel game-statistics-title">Max Score</p>
+                <p id="game-maxScoreReached"></p>
+            </div>
+            <div class="currentScore-group game-statistics-group">
+                <p class="currentScoreLabel game-statistics-title">Score</p>
+                <p id="game-currentScore"></p>
+            </div>
+            <div class="time-group game-statistics-group">
+                <p class="timeLabel game-statistics-title">Time</p>
+                <p id="game-time"></p>
+            </div>
+        </div>
+        <div id="game-popIt-panel"></div>
+        <div id="game-message"></div>
+    </div>
+    <div class="lost-section section">
+        <div class="title" data-aos="fade-up" data-aos-duration="3000">
+            <h1>You lost !</h1>
+            <p>Don't panic. Try again later !</p>
+        </div>
+        <div class="start" data-aos="zoom-in" data-aos-duration="3000">
+            <button class="start-btn">
+                <span id="play-btn" class="material-symbols-outlined">
+                    play_circle
+                </span>
+                <a class="start-game-link" href="./game.html">retry</a>
+            </button>
+        </div>
+        
+        <footer>
+            <small>Copyright © 2024 ARTHUR Félix-Vincent. Tous droits réservés.</small>
+        </footer>
         <audio id="myaudio" src="./music/background/background.mp3" autoplay="true" loop="true">
 
     </div>
+    <div class="fade-cover"></div>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init();
-        var audio = document.getElementById("myaudio");
-        audio.volume = 0.1;
+        
+        function showSection(sectionId) {
+            // Ajouter un log pour vérifier que la fonction est bien appelée
+            console.log('Transition vers la section:', sectionId);
+
+            const fadeCover = document.querySelector('.fade-cover');
+            fadeCover.classList.add('active');
+
+            // Attendre que le fondu soit terminé avant de changer de section
+            setTimeout(() => {
+                console.log('Transition terminée, changement de section.');
+                // Masquer toutes les sections
+                const sections = document.querySelectorAll('.section');
+                sections.forEach(section => section.classList.remove('active'));
+
+                // Montrer la section demandée
+                const sectionToShow = document.getElementsByClassName(sectionId)[0];
+                sectionToShow.classList.add('active');
+
+                // Retirer la classe active de la couverture après le fondu
+                fadeCover.classList.remove('active');
+
+                // Charger le jeu PopIt si on passe dans la section 'game-section'
+                if (sectionId === 'game-section') {
+                    loadPopItGame();
+                }
+            }, 500); // Le délai correspond à la durée du fondu (0.5s ici)
+        }
+
+        
+        function loadPopItGame() {
+            // Check if PopIt.js has already been loaded
+            if (!window.isPopItLoaded) {
+                const script = document.createElement('script');
+                script.src = './js/PopIt.js'; // Assurez-vous que le chemin est correct
+                document.body.appendChild(script);
+                
+                // Mark the game script as loaded to avoid multiple loads
+                window.isPopItLoaded = true;
+                
+                script.onload = () => {
+                    console.log('PopIt.js has been loaded and executed.');
+                    // Optionnel : appeler une fonction d'initialisation dans PopIt.js si nécessaire
+                    if (typeof startGame === 'function') {
+                        startGame(); // Démarrer le jeu si la fonction est définie
+                    }
+                };
+            }
+        }
+        
+        function endGame() {
+            // Here, you could add any logic for ending the game
+            showSection('game-over-section');
+        }
     </script>
+    <audio id="myaudio" src="./music/background/background.mp3" autoplay="true" loop="true">
 </body>
 </html>
